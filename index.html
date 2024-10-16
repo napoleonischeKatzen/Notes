@@ -2,13 +2,11 @@
 <html>
 <head>
 <!-- JS Inclusion#1 --> <script>
-let iconRandom = Math.random();
-  if (iconRandom < .33)
-    <link rel="icon" type="image/jpg" href="icon3.ico"/>
-  else if (iconRandom > .33 && iconRandom < .66)
-    <link rel="icon" type="image/jpg" href="icon3.ico"/>
-  else 
-    <link rel="icon" type="image/jpg" href="icon3.ico"/>
+let iconNumber = Math.ceil(Math.random() * 3);
+let favicon = document.createElement('link');
+favicon.rel = 'icon';
+favicon.href = `icon${iconNumber}.jpg`;
+document.head.appendChild(favicon);
 </script> <!-- JS Inclusion#1 End-->
 <meta charset="utf-8">
 <title>Notes</title>
