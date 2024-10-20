@@ -7,7 +7,8 @@ let favicon = document.createElement('link');
 favicon.rel = 'icon';
 favicon.href = `icons/icon${iconNumber}.ico`;
 document.head.appendChild(favicon);
-const image = document.createElement('div');
+let image = document.createElement('link');
+image.href = `icons/icon${iconNumber}.ico`;
 image = `icons/icon${iconNumber}.jpg`;
 document.body.appendChild(image);
 </script> <!-- JS Inclusion#1 End-->
