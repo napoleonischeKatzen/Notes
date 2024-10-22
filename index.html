@@ -1,20 +1,33 @@
 <!doctype html>
 <html>
 <head>
-<!-- JS Inclusion#1 --> <script>
-let iconNumber = Math.ceil(Math.random() * 3);
-let favicon = document.createElement('link');
-favicon.rel = 'icon';
-favicon.href = `icons/icon${iconNumber}.ico`;
-document.head.appendChild(favicon);
-/**/
-var image = new Image();
-image.src = "icons/icon1.jpg";
-document.body.appendChild(image);
-</script> <!-- JS Inclusion#1 End-->
 <meta charset="utf-8">
 <title>Leah's Notes</title>
-<body>
-</body>
+<script>
+let favicon = document.createElement('link');
+favicon.rel = 'icon';
+favicon.href = `icons/icon.ico`;
+document.head.appendChild(favicon);
+</script>
+<style>
+.centerImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45%;
+  height: auto;
+}
+.button {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
 </head>
+<body>
+<img src="icons/icon.jpg" class="centerImage">
+<input type="button" class="button" value="第３新東京市">
+</body>
 </html>
