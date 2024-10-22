@@ -10,15 +10,16 @@ favicon.href = `icons/icon.ico`;
 document.head.appendChild(favicon);
 </script>
 <style>
-.centerImage {
-  position: absolute;
+.container {
+  position: relative;
+}
+.container img {
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 45%;
+  width: 100%;
   height: auto;
 }
-.button {
+.container .btn {
   position: absolute;
   top: 75%;
   left: 50%;
@@ -26,8 +27,8 @@ document.head.appendChild(favicon);
 }
 </style>
 </head>
-<body>
+<div class="container">
 <img src="icons/icon.jpg" class="centerImage">
-<input type="button" class="button" value="第３新東京市">
-</body>
+<button class="btn">第３新東京市</button>
+</div>
 </html>
