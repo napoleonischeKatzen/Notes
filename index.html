@@ -10,12 +10,17 @@ favicon.href = `icons/icon.ico`;
 document.head.appendChild(favicon);
 </script>
 <style>
-.container {
-  height: 100vh;
-  width: 100vw;
-  position: relative;
+.top {
+  background-color: blue;
+  color: white;
+  position: absolute;
+  top: 27%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 1;
 }
-img {
+.image {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -23,16 +28,21 @@ img {
   max-width: 100%;
   max-height: 100%;
 }
-button {
+.bottom {
+  background-color: red;
+  color: white;
   position: absolute;
-  top: 70%;
+  top: 75%;
   left: 50%;
   transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 1;
 }
 </style>
 </head>
-<div class="container">
-<img src="icons/icon.jpg">
-<button>第３新東京市</button>
+<div>
+<button class="top" href="xxx.github.io/セントラルドグマ.html">Ma Recherche</button>
+<img class="image" src="https://github.com/napoleonischeKatzen/napoleonischeKatzen.github.io/blob/main/icons/icon.jpg?raw=true">
+<button class="bottom">第３新東京市</button>
 </div>
 </html>
