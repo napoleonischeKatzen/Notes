@@ -174,7 +174,7 @@ Je veux voir les langues par utilisation nationale &nbsp; <button id="nationalBu
   </div>
   <iframe id="inlineFrame" class="inlineFrame" frameBorder="0">
   </iframe>
-  <script src="index.js">
+  <script src="mots/index.js">
   </script>
 </body>
 <script>
@@ -483,7 +483,7 @@ if (searchInput !=="" && buttonValue !== "rien") {
     pageLink.href = "#"
     pageLink.textContent = `${searchInput}_${category}(${language})`
     pageLink.addEventListener("click", function () {
-      document.getElementById("inlineFrame").src = `${searchInput}_${category}(${language}).html`
+      document.getElementById("inlineFrame").src = `mots/${searchInput}_${category}(${language}).html`
       document.getElementById("inlineFrame").classList.remove("inlineFrame")
       document.getElementById("inlineFrame").classList.add("displayedInlineFrame")
     })
