@@ -474,7 +474,7 @@ if (searchInput !=="" && buttonValue !== "rien") {
     language = found.language
     const list = document.getElementById("list")
     list.innerHTML=""
-    let fileName = `${searchInput}_${category}(${language}).html`
+    let fileName = `mots/${searchInput}_${category}(${language}).html`
     inlineFrame.src = fileName
     document.getElementById("inlineFrame").classList.remove("inlineFrame")
     document.getElementById("inlineFrame").classList.add("displayedInlineFrame")
