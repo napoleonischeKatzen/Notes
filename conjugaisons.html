@@ -1,1 +1,565 @@
-
+<!doctype html>
+<html>
+<head>
+<title>Notes</title>
+</head>
+<style>
+html, body {
+  height: 50%;
+}
+html {
+  display: table;
+  margin: auto;
+}
+body {
+  display: table-cell;
+  vertical-align: middle;
+}
+.alphabeticalLanguageList {
+  position: absolute;
+  list-style-type: none;
+  overflow-y: scroll;
+  direction: rtl;
+  max-height: 750px;
+  width: 150px;
+}
+.aClass {
+  direction: ltr;
+}
+.languagesList {
+  position: relative;
+  right: 700px;
+}
+.clickable {
+  color: #000091;
+  text-decoration: underline;
+}
+.greenLanguageButton {
+  height: 20px;
+  width: 60px;
+  background-color: green;
+}
+.redLanguageButton {
+  height: 20px;
+  width: 60px;
+  background-color: red;
+}
+.pagesList {
+  position: relative;
+  left: 700px;
+}
+.loadedPagesList {
+  position: absolute;
+}
+.wrapper {
+  overflow: hidden;
+}
+.container {
+  margin-top: 15px;
+}
+.blue {
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  background-color: #000091;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px #999;
+}
+.blue:hover {background-color: #0000ec}
+.blue:active {
+  background-color: #000091;
+  box-shadow: 0 3px #666;
+  transform: translateY(4px);
+}
+.blueActivation {
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  background-color: #000091;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px #666;
+}
+.white {
+  padding: 15px 30px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  color: #000000;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px #999;
+}
+.white:hover {background-color: #bfbfbf}
+.white:active {
+  background-color: #ffffff;
+  box-shadow: 0 3px #666;
+  transform: translateY(4px);
+}
+.whiteActivation {
+  padding: 15px 30px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  color: #000000;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px #999;
+}
+.red {
+  padding: 15px 20px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  color: #ffffff;
+  background-color: #e1000f;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px #999;
+}
+.red:hover {background-color: #ff2937}
+.red:active {
+  background-color: #e1000f;
+  box-shadow: 0 3px #666;
+  transform: translateY(4px);
+}
+.redActivation {
+  padding: 15px 20px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  color: #ffffff;
+  background-color: #e1000f;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px #999;
+}
+.inlineFrame {
+  display: none;
+}
+.displayedInlineFrame {
+  display: block;
+  width: 450px;
+  height: 400px;
+}
+</style>
+<div id="languagesList" class="languagesList">
+</div>
+<div id="pagesList" class="pagesList">
+Tes pages vues:
+</div>
+<p>Je veux voir les langues par ordre alphabétique &nbsp;&nbsp;&nbsp; <button id="alphabeticalButton" class="redLanguageButton"></button><br>
+Je veux voir les langues par ordre généalogique &nbsp;&nbsp; <button id="genealogicalButton" class="redLanguageButton"></button></br>
+Je veux voir les langues par utilisation nationale &nbsp; <button id="nationalButton" class="redLanguageButton"></button></p>
+<body>
+  <button id="blueButton" class="blue">Verbes</button>
+  <button id="whiteButton" class="white">Noms</button>
+  <button id="redButton" class="red">Adjectifs</button>
+  <div class="wrapper">
+    <div class="container">
+    <input style="width: 160px;" id="search" type="input" class="input" placeholder="Écris ici"/>
+    <button id="charger">Charger</button>
+    <button id="effacer">Effacer</button>
+    <button id="rechercher">Rechercher</button>
+    </div>
+  </div>
+  <div id="list">
+  </div>
+  <iframe id="inlineFrame" class="inlineFrame" frameBorder="0">
+  </iframe>
+  <script src="index.js">
+  </script>
+</body>
+<script>
+const alphabeticalButton = document.getElementById("alphabeticalButton")
+alphabeticalButton.addEventListener("click", function() {
+  document.getElementById("languagesList").innerHTML =
+  `L'Ordre Alphabétique:</br><ul class="alphabeticalLanguageList">
+  <li class="language" data-language="Classical-Latin">Classical-Latin</li>
+  </ul>`
+  document.getElementById("alphabeticalButton").classList.remove("redLanguageButton")
+  document.getElementById("alphabeticalButton").classList.add("greenLanguageButton")
+  if (document.getElementById("genealogicalButton").classList.contains("greenLanguageButton")) {
+    document.getElementById("genealogicalButton").classList.remove("greenLanguageButton")
+    document.getElementById("genealogicalButton").classList.add("redLanguageButton")
+  }
+  if (document.getElementById("nationalButton").classList.contains("greenLanguageButton")) {
+    document.getElementById("nationalButton").classList.remove("greenLanguageButton")
+    document.getElementById("nationalButton").classList.add("redLanguageButton")
+  }
+  const languageItems = document.querySelectorAll(".language")
+  languageItems.forEach(item => {
+    item.addEventListener("dblclick", function() {
+      const languageName = item.dataset.language
+      document.getElementById("search").value = languageName
+      rechercherButton.click(languageName)
+    })
+  })
+})
+const genealogicalButton = document.getElementById("genealogicalButton")
+genealogicalButton.addEventListener("click", function() {
+  document.getElementById("languagesList").innerHTML =
+  `L'Ordre Généalogique:</br><ul>
+  <details>
+  <summary>Indo-European</summary>
+    <ul>
+    <details>
+    <summary>Italic</summary>
+      <ul>
+      <details>
+      <summary>Latino-Faliscan</summary>
+        <ul>
+        <div class="clickable">Archaic-Latin</div>
+        <div class="clickable">Classical-Latin</div>
+        <div class="clickable">Medieval-Latin</div>
+        </ul>
+      </details>
+      </ul>
+    </details>
+    </ul>
+  </details>
+  </ul>`
+  document.getElementById("genealogicalButton").classList.remove("redLanguageButton")
+  document.getElementById("genealogicalButton").classList.add("greenLanguageButton")
+  if (document.getElementById("alphabeticalButton").classList.contains("greenLanguageButton")) {
+    document.getElementById("alphabeticalButton").classList.remove("greenLanguageButton")
+    document.getElementById("alphabeticalButton").classList.add("redLanguageButton")
+  }
+  if (document.getElementById("nationalButton").classList.contains("greenLanguageButton")) {
+    document.getElementById("nationalButton").classList.remove("greenLanguageButton")
+    document.getElementById("nationalButton").classList.add("redLanguageButton")
+  }
+  const clickableElements = document.querySelectorAll(".clickable")
+  clickableElements.forEach(element => {
+    element.addEventListener("dblclick", function() {
+      document.getElementById("search").value = element.textContent
+      var searchTextContent = element.textContent
+      rechercherButton.click(searchTextContent)
+    })
+  })
+})
+const nationalButton = document.getElementById("nationalButton")
+nationalButton.addEventListener("click", function() {
+  document.getElementById("languagesList").innerHTML =
+  `L'Utilisation Nationale:</br><ul>
+    <details><summary>The United States</summary>
+      <ul>
+      <div class="clickable">Classical-Latin</div>
+      </ul>
+    </details>
+  </ul>`
+  document.getElementById("nationalButton").classList.remove("redLanguageButton")
+  document.getElementById("nationalButton").classList.add("greenLanguageButton")
+  if (document.getElementById("alphabeticalButton").classList.contains("greenLanguageButton")) {
+    document.getElementById("alphabeticalButton").classList.remove("greenLanguageButton")
+    document.getElementById("alphabeticalButton").classList.add("redLanguageButton")
+  }
+  if (document.getElementById("genealogicalButton").classList.contains("greenLanguageButton")) {
+    document.getElementById("genealogicalButton").classList.remove("greenLanguageButton")
+    document.getElementById("genealogicalButton").classList.add("redLanguageButton")
+  }
+  const clickableElements = document.querySelectorAll(".clickable")
+  clickableElements.forEach(element => {
+    element.addEventListener("dblclick", function() {
+      document.getElementById("search").value = element.textContent
+      var searchTextContent = element.textContent
+      rechercherButton.click(searchTextContent)
+    })
+  })
+})
+var buttonValue = "rien"
+var categoryValue
+const verbeButton = document.getElementById("blueButton")
+verbeButton.addEventListener("click", function(){
+  buttonUpdater()
+  verbeActivation()
+  const searchInput = document.getElementById("search").value
+  if (searchInput !="") {
+    verbSearchFunction(verbs.filter(verb => verb.word.includes(searchInput)))
+  }
+})
+function verbeActivation() {
+  document.getElementById("search").placeholder="Écris le verbe ici"
+  document.getElementById("blueButton").classList.remove("blue")
+  document.getElementById("blueButton").classList.add("blueActivation")
+  buttonValue = "verbe"
+  categoryValue = "verbs"
+}
+const nomButton = document.getElementById("whiteButton")
+nomButton.addEventListener("click", function(){
+  buttonUpdater()
+  nomActivation()
+  const searchInput = document.getElementById("search").value
+  if (searchInput !="") {
+    nounSearchFunction(nouns.filter(noun => noun.word.includes(searchInput)))
+  }
+})
+function nomActivation() {
+  document.getElementById("search").placeholder="Écris le nom ici"
+  document.getElementById("whiteButton").classList.remove("white")
+  document.getElementById("whiteButton").classList.add("whiteActivation")
+  buttonValue = "nom"
+  categoryValue = "nouns"
+}
+const adjectifButton = document.getElementById("redButton")
+adjectifButton.addEventListener("click", function(){
+  buttonUpdater()
+  adjectifActivation()
+  const searchInput = document.getElementById("search").value
+  if (searchInput !="") {
+    adjectiveSearchFunction(adjectives.filter(adjective => adjective.word.includes(searchInput)))
+  }
+})
+function adjectifActivation() {
+  document.getElementById("search").placeholder="Écris le adjectif ici"
+  document.getElementById("redButton").classList.remove("red")
+  document.getElementById("redButton").classList.add("redActivation")
+  buttonValue = "adjectif"
+  categoryValue = "adjectives"
+}
+function buttonUpdater() {
+  const list = document.getElementById("list")
+  list.innerHTML=""
+  if (verbeButton.classList.contains("blueActivation")) {
+    document.getElementById("blueButton").classList.remove("blueActivation")
+    document.getElementById("blueButton").classList.add("blue")
+  }
+  if (nomButton.classList.contains("whiteActivation")) {
+    document.getElementById("whiteButton").classList.remove("whiteActivation")
+    document.getElementById("whiteButton").classList.add("white")
+  }
+  if (adjectifButton.classList.contains("redActivation")) {
+    document.getElementById("redButton").classList.remove("redActivation")
+    document.getElementById("redButton").classList.add("red")
+  }
+}
+const searchInput = document.getElementById("search")
+searchInput.addEventListener("input", (e) => {
+  let value = e.target.value
+  value = value.trim().toLowerCase()
+  if (value === "") {
+    document.getElementById("list").innerHTML=""
+    return
+  }
+  if (buttonValue === "rien") {
+    noButton()
+  }
+  if (buttonValue === "verbe")
+    verbSearchFunction(verbs.filter(verb => {
+    return verb.word.includes(value)
+  }))
+  if (buttonValue === "nom")
+    nounSearchFunction(nouns.filter(noun => {
+    return noun.word.includes(value)
+  }))
+  if (buttonValue === "adjectif")
+    adjectiveSearchFunction(adjectives.filter(adjective => {
+    return adjective.word.includes(value)
+  }))
+});
+function noButton() {
+  const listDiv = document.getElementById("list")
+  const textContent = "Il n'y a pas de catégorie choisie!"
+  const placedTextNode = Array.from(listDiv.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent === textContent)
+  if (!placedTextNode) {
+    const textNode = document.createTextNode(textContent)
+    listDiv.appendChild(textNode)
+  }
+}
+function verbSearchFunction(results) {
+  const list = document.getElementById("list")
+  list.innerHTML=""
+  if (results.length === 0) {
+    const noResultsText = document.createTextNode("Pas de résultats")
+    list.appendChild(noResultsText)
+  }
+  else {
+    const filteredResults = results.filter(verb =>
+    verb.word.startsWith(document.getElementById("search").value)
+    )
+    if (filteredResults.length === 0) {
+      const noResultsText = document.createTextNode("Pas de résultats")
+      list.appendChild(noResultsText)
+    }
+    else {
+      for (const verb of filteredResults) {
+        const resultItem = document.createElement("li")
+        resultItem.classList.add("result-item")
+        const text = document.createTextNode(`${verb.word}, ${verb.language}`)
+        resultItem.appendChild(text)
+        list.appendChild(resultItem)
+      }
+    }
+  }
+}
+function nounSearchFunction(results) {
+  const list = document.getElementById("list")
+  list.innerHTML=""
+  if (results.length === 0) {
+    const noResultsText = document.createTextNode("Pas de résultats")
+    list.appendChild(noResultsText)
+  }
+  else {
+    const filteredResults = results.filter(noun =>
+    noun.word.startsWith(document.getElementById("search").value)
+    )
+    if (filteredResults.length === 0) {
+      const noResultsText = document.createTextNode("Pas de résultats")
+      list.appendChild(noResultsText)
+    }
+    else {
+      for (const noun of filteredResults) {
+        const resultItem = document.createElement("li")
+        resultItem.classList.add("result-item")
+        const text = document.createTextNode(`${noun.word}, ${noun.language}`)
+        resultItem.appendChild(text)
+        list.appendChild(resultItem)
+      }
+    }
+  }
+}
+function adjectiveSearchFunction(results) {
+  const list = document.getElementById("list")
+  list.innerHTML=""
+  if (results.length === 0) {
+    const noResultsText = document.createTextNode("Pas de résultats")
+    list.appendChild(noResultsText)
+  }
+  else {
+    const filteredResults = results.filter(adjective =>
+      adjective.word.startsWith(document.getElementById("search").value)
+    )
+    if (filteredResults.length === 0) {
+      const noResultsText = document.createTextNode("Pas de résultats")
+      list.appendChild(noResultsText)
+    }
+    else {
+      for (const adjective of filteredResults) {
+        const resultItem = document.createElement("li")
+        resultItem.classList.add("result-item")
+        const text = document.createTextNode(`${adjective.word}, ${adjective.language}`)
+        resultItem.appendChild(text)
+        list.appendChild(resultItem)
+      }
+    }
+  }
+}
+const chargerButton = document.getElementById("charger")
+chargerButton.addEventListener("click", function() {
+const searchInput = document.getElementById("search").value
+if (searchInput !=="" && buttonValue !== "rien") {
+  var found
+  var language
+  var category
+  if (categoryValue === "verbs") {
+    found = verbs.find(verb => verb.word === searchInput)
+    category = "verb"
+  }
+  else if (categoryValue === "nouns") {
+    found = nouns.find(noun => noun.word === searchInput)
+    category = "noun"
+  }
+  else if (categoryValue === "adjectives") {
+    found = adjectives.find(adjective => adjective.word === searchInput)
+    category = "adjective"
+  }
+  if (found) {
+    language = found.language
+    const list = document.getElementById("list")
+    list.innerHTML=""
+    let fileName = `${searchInput}_${category}(${language}).html`
+    inlineFrame.src = fileName
+    document.getElementById("inlineFrame").classList.remove("inlineFrame")
+    document.getElementById("inlineFrame").classList.add("displayedInlineFrame")
+    const pagesList = document.getElementById("pagesList")
+    const pageLink = document.createElement("a")
+    pageLink.href = "#"
+    pageLink.textContent = `${searchInput}_${category}(${language})`
+    pageLink.addEventListener("click", function () {
+      document.getElementById("inlineFrame").src = `${searchInput}_${category}(${language}).html`
+      document.getElementById("inlineFrame").classList.remove("inlineFrame")
+      document.getElementById("inlineFrame").classList.add("displayedInlineFrame")
+    })
+    pagesList.appendChild(document.createElement("br"))
+    pagesList.appendChild(pageLink)
+  }}
+})    
+const effacerButton = document.getElementById("effacer")
+effacerButton.addEventListener("click", function() {
+  effacement()
+  buttonUpdater()
+})
+function effacement() {
+  buttonValue = "rien"
+  document.getElementById("search").placeholder="Écris ici"
+  document.getElementById("search").value=""
+  const listDiv = document.getElementById("list")
+  const textContent = "Il n'y a pas de catégorie choisie!"
+  const placedTextNode = Array.from(listDiv.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent === textContent)
+  if (placedTextNode) {
+    listDiv.removeChild(placedTextNode)
+  }
+  if (inlineFrame.classList.contains("displayedInlineFrame")) {
+    document.getElementById("inlineFrame").classList.remove("displayedInlineFrame")
+    document.getElementById("inlineFrame").classList.add("inlineFrame")
+    inlineFrame.src=""
+  }
+}
+const rechercherButton = document.getElementById("rechercher")
+rechercherButton.addEventListener("click", function() {
+  const languageInput = document.getElementById("search").value.trim().toLowerCase()
+  const listDiv = document.getElementById("list")
+  listDiv.innerHTML=""
+  if (languageInput !=="") {
+    const filteredVerbs = verbs.filter(verb => verb.language.toLowerCase() === languageInput)
+    const filteredNouns = nouns.filter(noun => noun.language.toLowerCase() === languageInput)
+    const filteredAdjectives = adjectives.filter(adjective => adjective.language.toLowerCase() === languageInput)
+    if (filteredVerbs.length === 0 && filteredNouns.length === 0 && filteredAdjectives.length === 0) {
+      const noResultsText = document.createTextNode("Pas de résultats")
+      list.appendChild(noResultsText)
+    }
+    else {
+      if (filteredVerbs.length > 0) {
+        const verbTitle = document.createTextNode(filteredVerbs.length === 1 ? "Le verbe irrégulier de cette langue est:" : "Les verbes irréguliers de cette langue sont:")
+        listDiv.appendChild(verbTitle)
+        filteredVerbs.forEach(verb => {
+          const resultItem = document.createElement("li")
+          resultItem.classList.add("result-item")
+          const text = document.createTextNode(`${verb.word}`)
+          resultItem.appendChild(text)
+          listDiv.appendChild(resultItem)
+      })
+    }
+      if (filteredNouns.length > 0) {
+        const nounTitle = document.createTextNode(filteredNouns.length === 1 ? "Le nom irrégulier de cette langue est:" : "Les noms irréguliers de cette langue sont:")
+        listDiv.appendChild(nounTitle)
+        filteredNouns.forEach(noun => {
+          const resultItem = document.createElement("li")
+          resultItem.classList.add("result-item")
+          const text = document.createTextNode(`${noun.word}`)
+          resultItem.appendChild(text)
+          listDiv.appendChild(resultItem)
+      })
+    }
+      if (filteredAdjectives.length > 0) {
+        const adjectiveTitle = document.createTextNode(filteredAdjectives.length === 1 ? "Le adjectif irrégulier de cette langue est:" : "Les adjectifs irréguliers de cette langue sont:")
+        listDiv.appendChild(adjectiveTitle)
+        filteredAdjectives.forEach(adjective => {
+          const resultItem = document.createElement("li")
+          resultItem.classList.add("result-item")
+          const text = document.createTextNode(`${adjective.word}`)
+          resultItem.appendChild(text)
+          listDiv.appendChild(resultItem)
+      })
+    }
+  }}
+})
+</script>
+</html>
