@@ -1,12 +1,10 @@
 const verbs = [
-    { language: 'classical-latin', word: 'esse' },
-    { language: 'french', word: 'être'},
-    { language: 'classical-latin', word: 'posse'},
-    { language: 'german', word: 'sein'}
+    {language: 'classical-latin', word: 'esse' },
+    {language: 'classical-latin', word: 'posse'},
 ]
 const nouns = [
-    { language: 'classical-latin', word: 'deus'}
+    {language: 'classical-latin', word: 'nihil'}
 ]
 const adjectives = [
-    { language: 'classical-latin', word: 'unus'},
+    {language: 'classical-latin', word: 'unus'},
 ]
