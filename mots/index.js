@@ -7,4 +7,5 @@ const nouns = [
 ]
 const adjectives = [
     {language: 'classical-latin', word: 'unus'},
+    {language: 'classical-latin', word: 'nullus'},
 ]
