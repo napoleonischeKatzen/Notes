@@ -6,7 +6,7 @@ const nouns = [
     {language: 'classical-latin', word: 'nihil'}
 ]
 const adjectives = [
-    {language: 'classical-latin', word: 'unus'},
-    {language: 'classical-latin', word: 'nullus'},
-    {language: 'classical-latin', word: 'ullus'},
+    {language: 'classical-latin', word: 'ūnus'},
+    {language: 'classical-latin', word: 'nūllus'},
+    {language: 'classical-latin', word: 'ūllus'},
 ]
