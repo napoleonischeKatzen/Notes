@@ -9,4 +9,5 @@ const adjectives = [
     {language: 'classical-latin', word: 'ūnus'},
     {language: 'classical-latin', word: 'nūllus'},
     {language: 'classical-latin', word: 'ūllus'},
+    {language: 'classical-latin', word: 'sōlus'},
 ]
