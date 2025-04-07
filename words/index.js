@@ -15,5 +15,5 @@ const adjectives = [
     {language: 'classical-latin', word: 'neuter'},
     {language: 'classical-latin', word: 'uter'},
     {language: 'classical-latin', word: 'alter'},
-    {language: 'classical-latin', word: 'īdem'},
+    {language: 'classical-latin', word: 'īdem'}
 ]
