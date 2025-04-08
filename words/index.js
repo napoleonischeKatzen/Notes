@@ -3,7 +3,8 @@ const verbs = [
     {language: 'classical-latin', word: 'posse'},
 ]
 const nouns = [
-    {language: 'classical-latin', word: 'nihil'}
+    {language: 'classical-latin', word: 'nihil'},
+    {language: 'classical-latin', word: 'mīlia'}
 ]
 const adjectives = [
     {language: 'classical-latin', word: 'ūnus'},
@@ -18,6 +19,5 @@ const adjectives = [
     {language: 'classical-latin', word: 'īdem'},
     {language: 'classical-latin', word: 'duo'},
     {language: 'classical-latin', word: 'trēs'},
-    {language: 'classical-latin', word: 'mīlle'},
-    {language: 'classical-latin', word: 'mīlia'}
+    {language: 'classical-latin', word: 'mīlle'}
 ]
