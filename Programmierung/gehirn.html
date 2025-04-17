@@ -113,7 +113,7 @@ document.querySelectorAll(".section").forEach(section => {
 document.querySelectorAll(".subsection").forEach(subsection => {
     subsection.addEventListener("click", () => {
         const subsectionId = subsection.id;
-        document.getElementById("iframe").src = `${subsectionId}.html`;
+        document.getElementById("iframe").src = `sections/${subsectionId}.html`;
         const filename = `${subsectionId}.html`;
             iframe.innerHTML = html;
         });
