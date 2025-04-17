@@ -3,11 +3,10 @@
 <head>
 <title>Programmierung</title>
 <style>
-.body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fafafa;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 .contentButton {
     align-items: left;
@@ -17,11 +16,12 @@
     border-radius: 4px;
     cursor: pointer;
     border-bottom: 3px solid #ccc;
+    display: flex;
 }
 .main {
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 }
 .list {
     transition: width 0.3s;
@@ -48,18 +48,15 @@
 .subsection.expanded {
     display: block;
 }
-.content {
-    overflow: auto;
-    background: white;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 </style>
 </head>
 <body>
-<div class="container">
+<div>
 <button id="contentButton" class="contentButton">Content</button>
 <div class="main">
     <div id="list" class="list">
@@ -94,7 +91,7 @@
             <div class="subsection" id="theoreticalComputerScience1">Subsection 4.1</div>
             <div class="subsection" id="theoreticalComputerScience2">Subsection 4.2</div>
       </div>
-      <div id="content" class="content">
+      <iframe id="iframe" class="iframe" src=""></iframe>
       </div>
     </div>
   </div>
@@ -116,13 +113,10 @@ document.querySelectorAll(".section").forEach(section => {
 document.querySelectorAll(".subsection").forEach(subsection => {
     subsection.addEventListener("click", () => {
         const subsectionId = subsection.id;
-        const filename = `sections/${subsectionId}.html`;
-        fetch(filename)
-        .then(html => {
-            const content = document.getElementById("content");
-            content.innerHTML = html;
+        document.getElementById("iframe").src = `${subsectionId}.html`;
+        const filename = `${subsectionId}.html`;
+            iframe.innerHTML = html;
         });
     });
-});
 </script>
 </html>
