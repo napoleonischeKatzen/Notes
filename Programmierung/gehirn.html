@@ -1,4 +1,128 @@
-<doctype! html>
+<!doctype html>
 <html>
-
+<head>
+<title>Programmierung</title>
+<style>
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+}
+.contentButton {
+    align-items: left;
+    padding: 8px 12px;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border-bottom: 3px solid #ccc;
+}
+.main {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+.list {
+    transition: width 0.3s;
+    width: 300px;
+    background: #f0f0f0;
+    overflow-y: auto;
+}
+.collapsedList {
+    width: 0;
+    overflow: hidden;
+}
+.section {
+    padding: 10px;
+    background: #ddd;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+.subsection {
+    background: #eee;
+    display: none;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+.subsection.expanded {
+    display: block;
+}
+.content {
+    overflow: auto;
+    background: white;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<button id="contentButton" class="contentButton">Content</button>
+<div class="main">
+    <div id="list" class="list">
+        <div class="section">Algorithms & Data Structures (II)</div>
+            <div class="subsection" id="algorithms&dataStructures1">Subsection 2.1</div>
+            <div class="subsection" id="algorithms&dataStructures2">Subsection 2.2</div>
+        <div class="section">Artificial Intelligence (VII)</div>
+            <div class="subsection" id="artificialIntelligence1">Subsection 7.1</div>
+            <div class="subsection" id="artificialIntelligence2">Subsection 7.2</div>
+        <div class="section">Biological Computation (IX)</div>
+            <div class="subsection" id="biologicalComputation1">Subsection 9.1</div>
+            <div class="subsection" id="biologicalComputation2">Subsection 9.2</div>
+        <div class="section">Cognitive Computing (VIII)</div>
+            <div class="subsection" id="cognitiveComputing1">Subsection 8.1</div>
+            <div class="subsection" id="cognitiveComputing2">Subsection 8.2</div>
+        <div class="section">Computational Complexity Theory (V)</div>
+            <div class="subsection" id="computationalComplexityTheory1">Subsection 5.1</div>
+            <div class="subsection" id="computationalComplexityTheory2">Subsection 5.2</div>
+        <div class="section">Computer Architecture (III)</div>
+            <div class="subsection" id="computerArchitecture1">Subsection 3.1</div>
+            <div class="subsection" id="computerArchitecture2">Subsection 3.2</div>
+        <div class="section">Programming Languages (I)</div>
+            <div class="subsection" id="programmingLanguages1">Subsection 1.1</div>
+            <div class="subsection" id="programmingLanguages2">Subsection 1.2</div>
+        <div class="section">Programming Language Theory (VI)</div>
+            <div class="subsection" id="programmingLanguageTheory1">Subsection 6.1</div>
+            <div class="subsection" id="programmingLanguageTheory2">Subsection 6.2</div>
+        <div class="section">Quantum Computation (X)</div>
+            <div class="subsection" id="quantumComputation1">Subsection 10.1</div>
+            <div class="subsection" id="quantumComputation2">Subsection 10.2</div>
+        <div class="section">Theoretical Computer Science (IV)</div>
+            <div class="subsection" id="theoreticalComputerScience1">Subsection 4.1</div>
+            <div class="subsection" id="theoreticalComputerScience2">Subsection 4.2</div>
+      </div>
+      <div id="content" class="content">
+      </div>
+    </div>
+  </div>
+<script>
+document.getElementById("contentButton").addEventListener("click", () => {
+    const list = document.getElementById("list");
+    list.classList.toggle("collapsedList");
+});
+document.querySelectorAll(".section").forEach(section => {
+    section.addEventListener("click", () => {
+        let next = section.nextElementSibling;
+        while (next && !next.classList.contains("section")) {
+            next.classList.toggle("expanded");
+            next = next.nextElementSibling;
+        }
+    });
+});
+document.querySelectorAll(".subsection").forEach(subsection => {
+    subsection.addEventListener("click", () => {
+        const subsectionId = subsection.id;
+        const filename = `${subsectionId}.html`;
+        fetch(filename)
+        .then(html => {
+            const content = document.getElementById("content");
+            content.innerHTML = html;
+        });
+    });
+});
+</script>
+</body>
 </html>
