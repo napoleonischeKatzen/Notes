@@ -115,7 +115,7 @@ document.querySelectorAll(".section").forEach(section => {
 document.querySelectorAll(".subsection").forEach(subsection => {
     subsection.addEventListener("click", () => {
         const subsectionId = subsection.id;
-        const filename = `${subsectionId}.html`;
+        const filename = `sections/${subsectionId}.html`;
         fetch(filename)
         .then(html => {
             const content = document.getElementById("content");
