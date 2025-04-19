@@ -1,4 +1,127 @@
 <!doctype html>
 <html>
-
+<head>
+<title>Mathematik</title>
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+}
+.contentButton {
+    align-items: left;
+    padding: 8px 12px;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border-bottom: 3px solid #ccc;
+    display: flex;
+    z-index: 3;
+}
+.main {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.list {
+    transition: width 0.3s;
+    width: 300px;
+    background: #f0f0f0;
+    overflow-y: auto;
+}
+.collapsedList {
+    width: 0;
+    overflow: hidden;
+}
+.section {
+    padding: 10px;
+    background: #ddd;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+.subsection {
+    background: #eee;
+    display: none;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+.subsection.expanded {
+    display: block;
+}
+.iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.image {
+    z-index: 2;
+}
+</style>
+</head>
+<body>
+<div>
+<button id="contentButton" class="contentButton">Content</button>
+<div class="main">
+    <div id="list" class="list">
+        <div class="section">Applied Physics (X)</div>
+            <div class="subsection" id="appliedPhysics1">Subsection 2.1</div>
+            <div class="subsection" id="appliedPhysics2">Subsection 2.2</div>
+        <div class="section">Atomic Physics (VI)</div>
+            <div class="subsection" id="atomicPhysics1">Subsection 7.1</div>
+            <div class="subsection" id="atomicPhysics2">Subsection 7.2</div>
+        <div class="section">Classical & Continuum Physics (II)</div>
+            <div class="subsection" id="classical&continuumPhysics1">Subsection 9.1</div>
+            <div class="subsection" id="classical&continuumPhysics2">Subsection 9.2</div>
+        <div class="section">Complexity (IX)</div>
+            <div class="subsection" id="complexity1">Subsection 8.1</div>
+            <div class="subsection" id="complexity2">Subsection 8.2</div>
+        <div class="section">Computational Physics (VIII)</div>
+            <div class="subsection" id="computationalPhysics1">Subsection 5.1</div>
+            <div class="subsection" id="computationalPhysics2">Subsection 5.2</div>
+        <div class="section">Mathematical Physics (III)</div>
+            <div class="subsection" id="mathematicalPhysics1">Subsection 3.1</div>
+            <div class="subsection" id="mathematicalPhysics2">Subsection 3.2</div>
+        <div class="section">Mechanics (I)</div>
+            <div class="subsection" id="mechanics1">Subsection 1.1</div>
+            <div class="subsection" id="mechanics2">Subsection 1.2</div>
+        <div class="section">Particle & Nuclear Physics (VI)</div>
+            <div class="subsection" id="particle&nuclearPhysics1">Subsection 6.1</div>
+            <div class="subsection" id="particle&nuclearPhysics2">Subsection 6.2</div>
+        <div class="section">Quantum Physics (V)</div>
+            <div class="subsection" id="quantumPhysics1">Subsection 10.1</div>
+            <div class="subsection" id="quantumPhysics2">Subsection 10.2</div>
+        <div class="section">Theoretical Physics (IV)</div>
+            <div class="subsection" id="theoreticalPhysics1">Subsection 4.1</div>
+            <div class="subsection" id="theoreticalPhysics2">Subsection 4.2</div>
+      </div>
+      <iframe id="iframe" class="iframe" src=""></iframe>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+document.getElementById("contentButton").addEventListener("click", () => {
+    const list = document.getElementById("list");
+    list.classList.toggle("collapsedList");
+});
+document.querySelectorAll(".section").forEach(section => {
+    section.addEventListener("click", () => {
+        let next = section.nextElementSibling;
+        while (next && !next.classList.contains("section")) {
+            next.classList.toggle("expanded");
+            next = next.nextElementSibling;
+        }
+    });
+});
+document.querySelectorAll(".subsection").forEach(subsection => {
+    subsection.addEventListener("click", () => {
+        const subsectionId = subsection.id;
+        document.getElementById("iframe").src = `sections/${subsectionId}.html`;
+        const filename = `${subsectionId}.html`;
+            iframe.innerHTML = html;
+        });
+    });
+</script>
 </html>
