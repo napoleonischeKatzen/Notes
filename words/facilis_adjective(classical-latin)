@@ -29,34 +29,64 @@ table, th, td {
         <td>Neuter</td>
     </tr>
     <tr>
+        <td>Sin. Nominative</td>
+        <td>Facillimus</td>
+        <td>Facillima</td>
+        <td>Facillimum</td>
+    </tr>
+    <tr>
+        <td>Sin. Accusative</td>
+        <td>Facillimum</td>
+        <td>Facillimam</td>
+        <td>Facillimum</td>
+    </tr>
+    <tr>
+        <td>Sin. Dative</td>
+        <td>Facillimō</td>
+        <td>Facillimae</td>
+        <td>Facillimō</td>
+    </tr>
+    <tr>
+        <td>Sin. Genitive</td>
+        <td>Facillimī</td>
+        <td>Facillimae</td>
+        <td>Facillimī</td>
+    </tr>
+    <tr>
+        <td>Sin. Ablative</td>
+        <td>Facillimō</td>
+        <td>Facillimā</td>
+        <td>Facillimō</td>
+    </tr>
+    <tr>
         <td>Plu. Nominative</td>
-        <td>Duo</td>
-        <td>Duae</td>
-        <td>Duo</td>
+        <td>Facillimī</td>
+        <td>Facillimae</td>
+        <td>Facillima</td>
     </tr>
     <tr>
         <td>Plu. Accusative</td>
-        <td>Duōs</td>
-        <td>Duās</td>
-        <td>Duo</td>
+        <td>Facillimōs</td>
+        <td>Facillimās</td>
+        <td>Facillima</td>
     </tr>
     <tr>
         <td>Plu. Dative</td>
-        <td>Duōbus</td>
-        <td>Duābus</td>
-        <td>Duōbus</td>
+        <td>Facillimīs</td>
+        <td>Facillimīs</td>
+        <td>Facillimīs</td>
     </tr>
     <tr>
         <td>Plu. Genitive</td>
-        <td>Duōrum</td>
-        <td>Duārum</td>
-        <td>Duōrum</td>
+        <td>Facillimōrum</td>
+        <td>Facillimārum</td>
+        <td>Facillimōrum</td>
     </tr>
     <tr>
         <td>Plu. Ablative</td>
-        <td>Duōbus</td>
-        <td>Duābus</td>
-        <td>Duōbus</td>
+        <td>Facillimīs</td>
+        <td>Facillimīs</td>
+        <td>Facillimīs</td>
     </tr>
 </table>
 </div>
