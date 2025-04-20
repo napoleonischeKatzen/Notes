@@ -19,5 +19,10 @@ const adjectives = [
     {language: 'classical-latin', word: 'īdem'},
     {language: 'classical-latin', word: 'duo'},
     {language: 'classical-latin', word: 'trēs'},
-    {language: 'classical-latin', word: 'mīlle'}
+    {language: 'classical-latin', word: 'mīlle'},
+    {language: 'classical-latin', word: 'facilis'},
+    {language: 'classical-latin', word: 'difficilis'},
+    {language: 'classical-latin', word: 'humilis'},
+    {language: 'classical-latin', word: 'similis'},
+    {language: 'classical-latin', word: 'dissimilis'}
 ]
