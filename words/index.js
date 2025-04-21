@@ -27,6 +27,13 @@ const adjectives = [
     {language: 'classical-latin', word: 'dissimilis'},
     {language: 'classical-latin', word: 'interior'},
     {language: 'classical-latin', word: 'exterior'},
+    {language: 'classical-latin', word: 'bonus'},
+    {language: 'classical-latin', word: 'magnus'},
+    {language: 'classical-latin', word: 'malus'},
+    {language: 'classical-latin', word: 'multus'},
+    {language: 'classical-latin', word: 'parvus'},
+    {language: 'classical-latin', word: 'superus'},
+    {language: 'classical-latin', word: 'īnferus'},
     {language: 'english', word: 'outer'},
     {language: 'english', word: 'inner'}
 ]
