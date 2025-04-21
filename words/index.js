@@ -24,5 +24,7 @@ const adjectives = [
     {language: 'classical-latin', word: 'difficilis'},
     {language: 'classical-latin', word: 'humilis'},
     {language: 'classical-latin', word: 'similis'},
-    {language: 'classical-latin', word: 'dissimilis'}
+    {language: 'classical-latin', word: 'dissimilis'},
+    {language: 'english', word: 'outer'},
+    {language: 'english', word: 'inner'}
 ]
