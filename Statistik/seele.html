@@ -123,7 +123,7 @@ document.querySelectorAll(".subsection").forEach(subsection => {
         const subsectionId = subsection.id;
         document.getElementById("iframe").src = `sections/${subsectionId}.html`;
         const filename = `${subsectionId}.html`;
-            iframe.innerHTML = html;
+            iframe.innerHTML = filename;
         });
     });
 </script>
