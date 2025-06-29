@@ -35,6 +35,7 @@ const adjectives = [
     {language: 'classical-latin', word: 'superus'},
     {language: 'classical-latin', word: 'īnferus'},
     {language: 'classical-latin', word: 'dexter'},
+    {language: 'classical-latin', word: 'sinister'},
     {language: 'english', word: 'outer'},
     {language: 'english', word: 'inner'}
 ]
