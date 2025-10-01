@@ -1,61 +1,45 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Leah's Notes</title>
-  <style>
-    .buttons {
-      display: flex; /* Make children line up side-by-side */
-      justify-content: center; /* Center them horizontally */
-      gap: 10px; /* Optional: adds spacing between buttons */
-      margin: 20px auto;
-      flex-wrap: nowrap; /* Prevent wrapping to next line */
-    }
-
-    .buttons a {
-      text-decoration: none; /* Remove underline */
-    }
-
-    .blue, .white, .red {
-      padding: 10px 20px;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .blue {
-      background-color: blue;
-      color: white;
-    }
-
-    .white {
-      background-color: white;
-      color: black;
-    }
-
-    .red {
-      background-color: red;
-      color: white;
-    }
-
-    .image {
-      display: block;
-      margin: 0 auto;
-      width: 50%;
-    }
-  </style>
+<meta charset="utf-8">
+<title>Leah's Notes</title>
+<link rel="icon" href="https://github.com/napoleonischeKatzen/Notes/blob/main/favicon.ico?raw=true" type="image/x-icon">
+<style>
+.buttons {
+  display: flex;
+  jutify-content: center;
+  margin: 20px auto;
+  flex-wrap: nowrap;
+}
+.blue {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+.white {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+.red {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
+.image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
 </head>
-<body>
-
-  <div class="buttons">
-    <a href="projects.html"><button class="blue">Publications</button></a>
-    <a href="conjugaisons.html"><button class="white">Mots Irréguliers</button></a>
-    <a href="セントラルドグマ.html"><button class="red">Notes Scientifiques</button></a>
-  </div>
-
-  <div style="position: relative">
-    <img class="image" src="https://github.com/napoleonischeKatzen/Notes/blob/78aed30782e4aaa8e752db66e7ffe484be43dbf8/char.jpg?raw=true">
-  </div>
-
-</body>
+<div class="buttons">
+<a href="projects.html"><button class="blue">Publications</button></a>
+<a href="conjugaisons.html"><button class="white">Mots Irréguliers</button></a>
+<a href="セントラルドグマ.html"><button class="red">Notes Scientifiques</button></a>
+</div>
+<div style="position: relative">
+<img class="image" style="position: relative" src="https://github.com/napoleonischeKatzen/Notes/blob/78aed30782e4aaa8e752db66e7ffe484be43dbf8/char.jpg?raw=true">
+</div>
 </html>
