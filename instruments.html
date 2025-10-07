@@ -4,23 +4,28 @@
 <title>Instruments Linguistiques</title>
 </head>
 <style>
-html, body {
-  height: 50%;
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 html {
 	display: table;
-  margin: auto;
-}
-body {
-	display: table-cell;
-	vertical-align: middle;
+	margin: auto;
 }
 .pagesList {
-	position: relative;
-	left: 575px;
+	margin-left: 10px;
+    white-space: nowrap;
 }
 .loadedPagesList {
 	position: relative;
+}
+.top-bar {
+	display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
 .wrapper {
 	margin-top: 15px;
@@ -37,6 +42,11 @@ body {
 }
 .buttons {
 	margin-top: -17px;
+}
+.top-bar {
+	display: flex;
+    align-items: center;
+    gap: 10px;
 }
 .blue {
 	padding: 15px 25px;
@@ -155,10 +165,14 @@ body {
 }
 </style>
 <body>
-<div id="pagesList" class="pagesList">Pages vues:</div>
+<div class="top-bar">
+
+<div class="top-bar">
 <button id="blueButton" class="blue">Mots Irréguliers</button>
 <button id="whiteButton" class="white">Clavier</button>
 <button id="redButton" class="red">Mots Corrélatifs</button>
+<div id="pagesList" class="pagesList">Pages vues:</div>
+</div>
 <div class="wrapper">
   <div class="container">
     <div class="input-wrapper">
