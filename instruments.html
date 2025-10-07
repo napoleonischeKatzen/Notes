@@ -1,219 +1,189 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Instruments Linguistiques</title>
-</head>
-<style>
-body, html {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-html {
-	display: table;
-	margin: auto;
-}
-.pagesList {
-	margin-left: 10px;
-    white-space: nowrap;
-}
-.loadedPagesList {
-	position: relative;
-}
-.top-bar {
-	display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-}
-.wrapper {
-	margin-top: 15px;
-}
-.container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-	margin-top: 10px;
-}
-.input-wrapper {
-	position: relative;
-  display: inline-block;
-}
-.buttons {
-	margin-top: -17px;
-}
-.top-bar {
-	display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.blue {
-	padding: 15px 25px;
-  font-size: 24px;
-	cursor: pointer;
-	text-align: center;
-	color: #fff;
-	background-color: #000091;
-	border: none;
-	border-radius: 15px;
-	box-shadow: 0 10px #999;
-}
-.blue:hover {background-color: #0000ec}
-.blue:active {
-  background-color: #000091;
-  box-shadow: 0 3px #666;
-  transform: translateY(4px);
-}
-.blueActivation {
-	padding: 15px 25px;
-	font-size: 24px;
-	cursor: pointer;
-	text-align: center;
-	color: #fff;
-	background-color: #000091;
-	border: none;
-	border-radius: 15px;
-	box-shadow: 0 3px #666;
-}
-.white {
-	padding: 15px 30px;
-	font-size: 24px;
-	cursor: pointer;
-	text-align: center;
-	color: #000000;
-	background-color: #ffffff;
-	border: none;
-	border-radius: 15px;
-	box-shadow: 0 10px #999;
-}
-.white:hover {background-color: #bfbfbf}
-.white:active {
-	background-color: #ffffff;
-	box-shadow: 0 3px #666;
-	transform: translateY(4px);
-}
-.whiteActivation {
-	padding: 15px 30px;
-	font-size: 24px;
-	cursor: pointer;
-	text-align: center;
-	color: #000000;
-	background-color: #ffffff;
-	border: none;
-	border-radius: 15px;
-	box-shadow: 0 3px #999;
-}
-.red {
-	padding: 15px 20px;
-	font-size: 24px;
-	cursor: pointer;
-	text-align: center;
-	color: #ffffff;
-	background-color: #e1000f;
-	border: none;
-	border-radius: 15px;
-	box-shadow: 0 10px #999;
-}
-.red:hover {background-color: #ff2937}
-.red:active {
-	background-color: #e1000f;
-	box-shadow: 0 3px #666;
-	transform: translateY(4px);
-}
-.redActivation {
-	padding: 15px 20px;
-	font-size: 24px;
-	cursor: pointer;
-	text-align: center;
-	color: #ffffff;
-	background-color: #e1000f;
-	border: none;
-	border-radius: 15px;
-	box-shadow: 0 3px #999;
-}
-.inlineFrame {
-	display: none;
-	text-align: center;
-	overflow: hidden;
-}
-.displayedInlineFrame {
-	display: block;
-	text-align: center;
-	overflow: hidden;
-	width: 500px;
-	height: 725px;
-	margin-top: 10px;
-}
-.suggestions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  border: 1px solid #ccc;
-  max-height: 150px;
-  overflow-y: hidden;
-  margin-top: 4px;
-  padding: 0;
-  list-style: none;
-  background: white;
-  z-index: 10;
-}
-.suggestions li {
-	padding: 8px;
-  cursor: pointer;
-}
-</style>
-<body>
-<div class="top-bar">
+  <title>Instruments Linguistiques</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-<div class="top-bar">
-<button id="blueButton" class="blue">Mots Irréguliers</button>
-<button id="whiteButton" class="white">Clavier</button>
-<button id="redButton" class="red">Mots Corrélatifs</button>
-<div id="pagesList" class="pagesList">Pages vues:</div>
-</div>
-<div class="wrapper">
-  <div class="container">
-    <div class="input-wrapper">
-      <input type="text" id="autocomplete" size="50" placeholder="Écris une langue ici"/>
+    .center-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Align left edge */
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px; /* Distance to input area */
+    }
+
+    .pagesList {
+      white-space: nowrap;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 2px;
+    }
+
+    .blue, .white, .red {
+      padding: 15px 25px;
+      font-size: 24px;
+      cursor: pointer;
+      text-align: center;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 10px #999;
+    }
+
+    .blue {
+      color: #fff;
+      background-color: #000091;
+    }
+    .blue:hover { background-color: #0000ec; }
+    .blue:active {
+      background-color: #000091;
+      box-shadow: 0 3px #666;
+      transform: translateY(4px);
+    }
+
+    .white {
+      color: #000;
+      background-color: #fff;
+    }
+    .white:hover { background-color: #bfbfbf; }
+    .white:active {
+      background-color: #ffffff;
+      box-shadow: 0 3px #666;
+      transform: translateY(4px);
+    }
+
+    .red {
+      color: #fff;
+      background-color: #e1000f;
+    }
+    .red:hover { background-color: #ff2937; }
+    .red:active {
+      background-color: #e1000f;
+      box-shadow: 0 3px #666;
+      transform: translateY(4px);
+    }
+
+    .inlineFrame {
+      display: none;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .displayedInlineFrame {
+      display: block;
+      width: 500px;
+      height: 725px;
+      margin-top: 10px;
+    }
+
+    .suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      max-height: 150px;
+      overflow-y: auto;
+      margin-top: 4px;
+      padding: 0;
+      list-style: none;
+      background: white;
+      z-index: 10;
+    }
+
+    .suggestions li {
+      padding: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="center-wrapper">
+    
+    <!-- Top buttons and pages -->
+    <div class="top-bar">
+      <button id="blueButton" class="blue">Mots Irréguliers</button>
+      <button id="whiteButton" class="white">Clavier</button>
+      <button id="redButton" class="red">Mots Corrélatifs</button>
+      <div id="pagesList" class="pagesList">Pages vues:</div>
+    </div>
+
+    <!-- Input box and charger/effacer aligned to blue button -->
+    <div class="wrapper">
+      <div class="input-wrapper">
+        <input type="text" id="autocomplete" size="50" placeholder="Écris une langue ici" />
         <ul id="suggestions"></ul>
-          </div>
-            <div class="buttons">
-              <button id="charger">Charger</button>
-              <button id="effacer">Effacer</button>
-            	</div>
-          </div>
       </div>
-    <script src="words/index.js"></script>
+      <div class="buttons">
+        <button id="charger">Charger</button>
+        <button id="effacer">Effacer</button>
+      </div>
+    </div>
+
     <iframe id="inlineFrame" class="inlineFrame" frameBorder="0"></iframe>
-<script>
-const langues = [
-	"Biblical-Hebrew",
-  "Classical-Latin"
-];
-const input = document.getElementById("autocomplete");
-const suggestions = document.getElementById("suggestions");
-input.addEventListener("input", () => {
-	const value = input.value.toLowerCase();
-    suggestions.innerHTML = "";
-    if (value === "") return;
-    const filtered = langues.filter(langue => langue.toLowerCase().includes(value))
-    .sort((a, b) => a.localeCompare(b));
-    filtered.forEach(langue => {
-    	const li = document.createElement("li");
+  </div>
+
+  <script>
+    const langues = [
+      "Biblical-Hebrew",
+      "Classical-Latin"
+    ];
+
+    const input = document.getElementById("autocomplete");
+    const suggestions = document.getElementById("suggestions");
+
+    input.addEventListener("input", () => {
+      const value = input.value.toLowerCase();
+      suggestions.innerHTML = "";
+      if (value === "") return;
+
+      const filtered = langues
+        .filter(langue => langue.toLowerCase().includes(value))
+        .sort((a, b) => a.localeCompare(b));
+
+      filtered.forEach(langue => {
+        const li = document.createElement("li");
         li.textContent = langue;
         li.addEventListener("click", () => {
-        input.value = langue;
-        suggestions.innerHTML = "";
+          input.value = langue;
+          suggestions.innerHTML = "";
+        });
+        suggestions.appendChild(li);
+      });
     });
-    suggestions.appendChild(li);
+
+    document.getElementById("effacer").addEventListener("click", () => {
+      input.value = "";
+      suggestions.innerHTML = "";
     });
-});
-document.getElementById("effacer").addEventListener("click", () => {
-	input.value = "";
-  suggestions.innerHTML = "";
-});
-</script>
+  </script>
 </body>
 </html>
