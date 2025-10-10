@@ -29,6 +29,8 @@
 
     .pagesList {
       white-space: nowrap;
+      margin-left: 20px;
+      font-family: sans-serif;
     }
 
     .wrapper {
@@ -57,6 +59,7 @@
       border: none;
       border-radius: 15px;
       box-shadow: 0 10px #999;
+      user-select: none;
     }
 
     .blue {
@@ -64,7 +67,7 @@
       background-color: #000091;
     }
     .blue:hover { background-color: #0000ec; }
-    .blue:active {
+    .blue.active {
       background-color: #000091;
       box-shadow: 0 3px #666;
       transform: translateY(4px);
@@ -75,7 +78,7 @@
       background-color: #fff;
     }
     .white:hover { background-color: #bfbfbf; }
-    .white:active {
+    .white.active {
       background-color: #ffffff;
       box-shadow: 0 3px #666;
       transform: translateY(4px);
@@ -86,7 +89,7 @@
       background-color: #e1000f;
     }
     .red:hover { background-color: #ff2937; }
-    .red:active {
+    .red.active {
       background-color: #e1000f;
       box-shadow: 0 3px #666;
       transform: translateY(4px);
@@ -124,20 +127,21 @@
       padding: 8px;
       cursor: pointer;
     }
+
+    .suggestions li:hover {
+      background: #eee;
+    }
   </style>
 </head>
 <body>
   <div class="center-wrapper">
-    
-    <!-- Top buttons and pages -->
     <div class="top-bar">
       <button id="blueButton" class="blue">Mots Irréguliers</button>
       <button id="whiteButton" class="white">Clavier</button>
       <button id="redButton" class="red">Mots Corrélatifs</button>
-      <div id="pagesList" class="pagesList">Pages vues:</div>
+      <div id="pagesList" class="pagesList"><strong>Pages vues:</strong> </div>
     </div>
 
-    <!-- Input box and charger/effacer aligned to blue button -->
     <div class="wrapper">
       <div class="input-wrapper">
         <input type="text" id="autocomplete" size="50" placeholder="Écris une langue ici" />
@@ -153,19 +157,26 @@
   </div>
 
   <script>
-    const langues = [
-      "Biblical-Hebrew",
-      "Classical-Latin"
-    ];
-
+    const langues = ["Biblical-Hebrew", "Classical-Latin"];
     const input = document.getElementById("autocomplete");
     const suggestions = document.getElementById("suggestions");
+    const iframe = document.getElementById("inlineFrame");
+    const pagesList = document.getElementById("pagesList");
+
+    const blueBtn = document.getElementById("blueButton");
+    const whiteBtn = document.getElementById("whiteButton");
+    const redBtn = document.getElementById("redButton");
+
+    const colorButtons = [blueBtn, whiteBtn, redBtn];
 
     input.addEventListener("input", () => {
       const value = input.value.toLowerCase();
+
+      // 🔹 Unpress active button when user types
+      colorButtons.forEach(b => b.classList.remove("active"));
+
       suggestions.innerHTML = "";
       if (value === "") return;
-
       const filtered = langues
         .filter(langue => langue.toLowerCase().includes(value))
         .sort((a, b) => a.localeCompare(b));
@@ -184,6 +195,48 @@
     document.getElementById("effacer").addEventListener("click", () => {
       input.value = "";
       suggestions.innerHTML = "";
+    });
+
+    colorButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        colorButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+
+    document.getElementById("charger").addEventListener("click", () => {
+      const lang = input.value.trim();
+      if (!lang) {
+        alert("Veuillez entrer une langue avant de charger.");
+        return;
+      }
+
+      const normalizedLang = lang.toLowerCase();
+
+      let fileName = "";
+      if (blueBtn.classList.contains("active")) {
+        fileName = `irregular(${normalizedLang}).html`;
+      } else if (whiteBtn.classList.contains("active")) {
+        fileName = `keyboard(${normalizedLang}).html`;
+      } else if (redBtn.classList.contains("active")) {
+        fileName = `correlative(${normalizedLang}).html`;
+      } else {
+        fileName = `conjugations(${normalizedLang}).html`;
+      }
+
+      iframe.src = fileName;
+      iframe.classList.add("displayedInlineFrame");
+
+      const existingLinks = Array.from(pagesList.querySelectorAll("a")).map(a => a.href);
+      const fullURL = new URL(fileName, window.location.href).href;
+      if (!existingLinks.includes(fullURL)) {
+        const link = document.createElement("a");
+        link.href = fileName;
+        link.textContent = fileName;
+        link.target = "_blank";
+        link.style.marginLeft = "10px";
+        pagesList.appendChild(link);
+      }
     });
   </script>
 </body>
