@@ -157,16 +157,9 @@
       "Biblical-Hebrew",
       "Classical-Latin"
     ];
+
     const input = document.getElementById("autocomplete");
     const suggestions = document.getElementById("suggestions");
-    const iframe = document.getElementById("inlineFrame");
-    const pagesList = document.getElementById("pagesList");
-
-    const blueBtn = document.getElementById("blueButton");
-    const whiteBtn = document.getElementById("whiteButton");
-    const redBtn = document.getElementById("redButton");
-
-    const colorButtons = [bluueBtn, whiteBtn, redBtn];
 
     input.addEventListener("input", () => {
       const value = input.value.toLowerCase();
@@ -192,37 +185,6 @@
       input.value = "";
       suggestions.innerHTML = "";
     });
-colorButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    colorButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-  }):
-});
-const normalizedLang = lang.toLowerCase();
-let fileName = "";
-    if (blueBtn.classList.contains("active")) {
-      fileName = `irregular(${normalizedLang}).html`;
-    }  else if (whiteBtn.classList.contains("active")) {
-      fileName = `keyboard(${normalizedLang}).html`;
-    } else if (redBtn.classList.contains("active")) {
-      fileName = `correlative(${normalizedLang}).html`;
-    } else {
-      fileName = `conjugations($normalizedLang}).html`;
-    }
-iframe.src = fileName;
-iframe.classList.add("displayedInlineFrame");
-
-const existingLinks = Array.from(pagesList.querySelectorAll("a")).map(a => a.href);
-const fullURL = new URL(fileName, window.location.href).href;
-if (!existingLinks.includes(fullURL)) {
-    const link = document.createElement("a");
-    link.href = fileName;
-    link.textContent = fileName;
-    link.target = "_blank";
-    link.target.marginLeft = "10px";
-    pagesList.appendChild(link);
-    }  
-  });
   </script>
 </body>
 </html>
