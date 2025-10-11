@@ -172,12 +172,10 @@
 
     input.addEventListener("input", () => {
       const value = input.value.toLowerCase();
-
-      // 🔹 Unpress active button when user types
       colorButtons.forEach(b => b.classList.remove("active"));
-
       suggestions.innerHTML = "";
       if (value === "") return;
+
       const filtered = langues
         .filter(langue => langue.toLowerCase().includes(value))
         .sort((a, b) => a.localeCompare(b));
@@ -205,29 +203,8 @@
       });
     });
 
-    document.getElementById("charger").addEventListener("click", () => {
-      const lang = input.value.trim();
-      if (!lang) {
-        alert("Veuillez entrer une langue avant de charger.");
-        return;
-      }
-
-      const normalizedLang = lang.toLowerCase();
-
-      let fileName = "";
-      if (blueBtn.classList.contains("active")) {
-        fileName = `irregular(${normalizedLang}).html`;
-      } else if (whiteBtn.classList.contains("active")) {
-        fileName = `keyboard(${normalizedLang}).html`;
-      } else if (redBtn.classList.contains("active")) {
-        fileName = `correlative(${normalizedLang}).html`;
-      } else {
-        fileName = `conjugations(${normalizedLang}).html`;
-      }
-
-      iframe.src = fileName;
-      iframe.classList.add("displayedInlineFrame");
-
+    // Helper: add a page link under "Pages vues"
+    function addPageLink(fileName) {
       const existingLinks = Array.from(pagesList.querySelectorAll("a")).map(a => a.href);
       const fullURL = new URL(fileName, window.location.href).href;
       if (!existingLinks.includes(fullURL)) {
@@ -238,6 +215,61 @@
         link.style.marginLeft = "10px";
         pagesList.appendChild(link);
       }
+    }
+
+    // Handle double-clicks on words inside iframe
+    iframe.addEventListener("load", () => {
+      const lang = input.value.trim();
+      if (!lang) return;
+
+      const normalizedLang = lang.toLowerCase();
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+      if (!iframeDoc) return;
+
+      if (blueBtn.classList.contains("active")) {
+        let lastClicked = null;
+        let lastTime = 0;
+
+        iframeDoc.addEventListener("click", e => {
+          if (e.target && e.target.textContent) {
+            const now = Date.now();
+            const word = e.target.textContent.trim();
+            if (lastClicked === word && now - lastTime < 500) {
+              const subFile = `files/irregular/irregular(${normalizedLang})/${word.toLowerCase()}(${normalizedLang}).html`;
+              iframe.src = subFile;
+              addPageLink(subFile);
+            }
+            lastClicked = word;
+            lastTime = now;
+          }
+        });
+      }
+    });
+
+    // Main "Charger" button
+    document.getElementById("charger").addEventListener("click", () => {
+      const lang = input.value.trim();
+      if (!lang) {
+        alert("Veuillez entrer une langue avant de charger.");
+        return;
+      }
+
+      const normalizedLang = lang.toLowerCase();
+      let fileName = "";
+
+      if (blueBtn.classList.contains("active")) {
+        fileName = `files/irregular/irregular(${normalizedLang}).html`;
+      } else if (whiteBtn.classList.contains("active")) {
+        fileName = `files/keyboards/keyboard(${normalizedLang}).html`;
+      } else if (redBtn.classList.contains("active")) {
+        fileName = `files/correlative/correlative(${normalizedLang}).html`;
+      } else {
+        fileName = `files/inflections/inflections(${normalizedLang}).html`;
+      }
+
+      iframe.src = fileName;
+      iframe.classList.add("displayedInlineFrame");
+      addPageLink(fileName);
     });
   </script>
 </body>
