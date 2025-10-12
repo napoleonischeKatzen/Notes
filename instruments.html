@@ -7,7 +7,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      overflow-x: hidden; /* ✅ no horizontal scroll by default */
+      overflow-x: hidden; /* ✅ no scroll by default */
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -16,33 +16,40 @@
     .center-wrapper {
       display: flex;
       flex-direction: column;
-      align-items: center; /* ✅ center horizontally */
+      align-items: center;
       margin-top: 20px;
     }
 
     .top-bar {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
+      justify-content: center;
       width: 100%;
       margin-bottom: 15px;
-    }
-
-    .top-bar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       gap: 10px;
     }
 
+    .pagesListContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 15px;
+    }
+
+    .pagesListLabel {
+      font-family: monospace;
+      font-weight: bold;
+      color: #000091;
+    }
+
     .pagesList {
-      margin-top: 10px;
-      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
     }
 
     .pagesList a {
-      display: inline-block;
-      margin: 0 6px;
       text-decoration: none;
       color: #000091;
       font-family: monospace;
@@ -156,12 +163,15 @@
 <body>
   <div class="center-wrapper">
     <div class="top-bar">
-      <div class="top-bar-inner">
-        <button id="blueButton" class="blue">Mots Irréguliers</button>
-        <button id="whiteButton" class="white">Clavier</button>
-        <button id="redButton" class="red">Mots Corrélatifs</button>
+      <button id="blueButton" class="blue">Mots Irréguliers</button>
+      <button id="whiteButton" class="white">Clavier</button>
+      <button id="redButton" class="red">Mots Corrélatifs</button>
+
+      <!-- ✅ Pages vues stays to the right of red button -->
+      <div class="pagesListContainer">
+        <div class="pagesListLabel">Pages vues:</div>
+        <div id="pagesList" class="pagesList"></div>
       </div>
-      <div id="pagesList" class="pagesList">Pages vues:</div> <!-- ✅ now separate below buttons -->
     </div>
 
     <div class="wrapper">
@@ -237,7 +247,7 @@
           e.preventDefault();
           iframe.src = filePath;
           iframe.classList.add("displayedInlineFrame");
-          document.documentElement.style.overflowX = "auto"; // ✅ enable horizontal scroll for page
+          document.documentElement.style.overflowX = "auto"; // ✅ enable horizontal scroll for entire page
         });
 
         pagesList.appendChild(link);
