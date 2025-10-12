@@ -7,7 +7,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      overflow-x: auto; /* ✅ horizontal scroll for long pagesList */
+      overflow-x: auto; /* ✅ horizontal scroll for wide layouts */
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -16,7 +16,7 @@
     .center-wrapper {
       display: flex;
       flex-direction: column;
-      align-items: center; /* ✅ keep buttons centered */
+      align-items: flex-start;
       margin-top: 20px;
     }
 
@@ -24,21 +24,28 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      width: 100%;
     }
 
+    .top-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* ✅ Keep "Pages vues" on the right */
     .pagesList {
       display: flex;
       flex-direction: row;
-      gap: 15px;
-      margin-top: 10px;
-      overflow-x: auto; /* ✅ horizontal scroll */
-      white-space: nowrap;
-      max-width: 90vw;
-      padding-bottom: 5px;
       align-items: center;
+      gap: 10px;
+      margin-left: 20px;
+      overflow-x: auto;
+      white-space: nowrap;
+      max-width: 40vw;
     }
 
     .pagesList a {
@@ -57,7 +64,6 @@
       flex-direction: row;
       gap: 15px;
       align-items: flex-start;
-      justify-content: center;
     }
 
     .input-wrapper {
@@ -156,12 +162,13 @@
 <body>
   <div class="center-wrapper">
     <div class="top-bar">
-      <button id="blueButton" class="blue">Mots Irréguliers</button>
-      <button id="whiteButton" class="white">Clavier</button>
-      <button id="redButton" class="red">Mots Corrélatifs</button>
+      <div class="top-bar-inner">
+        <button id="blueButton" class="blue">Mots Irréguliers</button>
+        <button id="whiteButton" class="white">Clavier</button>
+        <button id="redButton" class="red">Mots Corrélatifs</button>
+        <div id="pagesList" class="pagesList">Pages vues:</div>
+      </div>
     </div>
-
-    <div id="pagesList" class="pagesList">Pages vues:</div>
 
     <div class="wrapper">
       <div class="input-wrapper">
@@ -223,17 +230,16 @@
       });
     });
 
-    // ✅ Add compact link under "Pages vues" that loads in same iframe
+    // ✅ Add compact link on right, loads in iframe
     function addPageLink(filePath) {
       const existingLinks = Array.from(pagesList.querySelectorAll("a")).map(a => a.href);
       const fullURL = new URL(filePath, window.location.href).href;
       if (!existingLinks.includes(fullURL)) {
         const link = document.createElement("a");
-        link.href = "#"; // prevent navigating away
+        link.href = "#";
         const shortName = filePath.split("/").pop();
         link.textContent = shortName;
 
-        // load the file into iframe when clicked
         link.addEventListener("click", (e) => {
           e.preventDefault();
           iframe.src = filePath;
@@ -244,7 +250,7 @@
       }
     }
 
-    // ✅ Handle double-clicks on words inside iframe
+    // ✅ Handle double-clicks in irregular pages
     iframe.addEventListener("load", () => {
       const lang = input.value.trim();
       if (!lang) return;
@@ -274,7 +280,7 @@
       }
     });
 
-    // ✅ Main "Charger" button
+    // ✅ Main "Charger" button logic
     document.getElementById("charger").addEventListener("click", () => {
       const lang = input.value.trim();
       if (!lang) {
