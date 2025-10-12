@@ -7,7 +7,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      overflow-x: auto; /* ✅ horizontal scroll for wide layouts */
+      overflow-x: hidden; /* ✅ no horizontal scroll by default */
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -16,39 +16,33 @@
     .center-wrapper {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center; /* ✅ center horizontally */
       margin-top: 20px;
     }
 
     .top-bar {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 15px;
       width: 100%;
+      margin-bottom: 15px;
     }
 
     .top-bar-inner {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
+      gap: 10px;
     }
 
-    /* ✅ Keep "Pages vues" on the right */
     .pagesList {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 10px;
-      margin-left: 20px;
-      overflow-x: auto;
-      white-space: nowrap;
-      max-width: 40vw;
+      margin-top: 10px;
+      text-align: center;
     }
 
     .pagesList a {
+      display: inline-block;
+      margin: 0 6px;
       text-decoration: none;
       color: #000091;
       font-family: monospace;
@@ -63,7 +57,8 @@
       display: flex;
       flex-direction: row;
       gap: 15px;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: center;
     }
 
     .input-wrapper {
@@ -123,7 +118,6 @@
 
     .inlineFrame {
       display: none;
-      text-align: center;
       overflow: hidden;
     }
 
@@ -166,8 +160,8 @@
         <button id="blueButton" class="blue">Mots Irréguliers</button>
         <button id="whiteButton" class="white">Clavier</button>
         <button id="redButton" class="red">Mots Corrélatifs</button>
-        <div id="pagesList" class="pagesList">Pages vues:</div>
       </div>
+      <div id="pagesList" class="pagesList">Pages vues:</div> <!-- ✅ now separate below buttons -->
     </div>
 
     <div class="wrapper">
@@ -230,7 +224,6 @@
       });
     });
 
-    // ✅ Add compact link on right, loads in iframe
     function addPageLink(filePath) {
       const existingLinks = Array.from(pagesList.querySelectorAll("a")).map(a => a.href);
       const fullURL = new URL(filePath, window.location.href).href;
@@ -244,13 +237,14 @@
           e.preventDefault();
           iframe.src = filePath;
           iframe.classList.add("displayedInlineFrame");
+          document.documentElement.style.overflowX = "auto"; // ✅ enable horizontal scroll for page
         });
 
         pagesList.appendChild(link);
+        document.documentElement.style.overflowX = "auto"; // ✅ enable scroll when link appears
       }
     }
 
-    // ✅ Handle double-clicks in irregular pages
     iframe.addEventListener("load", () => {
       const lang = input.value.trim();
       if (!lang) return;
@@ -280,7 +274,6 @@
       }
     });
 
-    // ✅ Main "Charger" button logic
     document.getElementById("charger").addEventListener("click", () => {
       const lang = input.value.trim();
       if (!lang) {
