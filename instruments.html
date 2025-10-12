@@ -7,7 +7,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
+      overflow-x: auto; /* ✅ horizontal scroll for long pagesList */
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -16,22 +16,40 @@
     .center-wrapper {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center; /* ✅ keep buttons centered */
       margin-top: 20px;
     }
 
     .top-bar {
       display: flex;
       align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .pagesList {
       display: flex;
-      flex-direction: column;
-      margin-left: 20px;
-      gap: 5px;
+      flex-direction: row;
+      gap: 15px;
+      margin-top: 10px;
+      overflow-x: auto; /* ✅ horizontal scroll */
+      white-space: nowrap;
+      max-width: 90vw;
+      padding-bottom: 5px;
+      align-items: center;
+    }
+
+    .pagesList a {
+      text-decoration: none;
+      color: #000091;
+      font-family: monospace;
+      cursor: pointer;
+    }
+
+    .pagesList a:hover {
+      text-decoration: underline;
     }
 
     .wrapper {
@@ -39,6 +57,7 @@
       flex-direction: row;
       gap: 15px;
       align-items: flex-start;
+      justify-content: center;
     }
 
     .input-wrapper {
@@ -140,8 +159,9 @@
       <button id="blueButton" class="blue">Mots Irréguliers</button>
       <button id="whiteButton" class="white">Clavier</button>
       <button id="redButton" class="red">Mots Corrélatifs</button>
-      <div id="pagesList" class="pagesList">Pages vues:</div>
     </div>
+
+    <div id="pagesList" class="pagesList">Pages vues:</div>
 
     <div class="wrapper">
       <div class="input-wrapper">
@@ -203,21 +223,28 @@
       });
     });
 
-    // Helper: add a page link under "Pages vues"
-    function addPageLink(fileName) {
+    // ✅ Add compact link under "Pages vues" that loads in same iframe
+    function addPageLink(filePath) {
       const existingLinks = Array.from(pagesList.querySelectorAll("a")).map(a => a.href);
-      const fullURL = new URL(fileName, window.location.href).href;
+      const fullURL = new URL(filePath, window.location.href).href;
       if (!existingLinks.includes(fullURL)) {
         const link = document.createElement("a");
-        link.href = fileName;
-        link.textContent = fileName;
-        link.target = "_blank";
-        link.style.marginLeft = "10px";
+        link.href = "#"; // prevent navigating away
+        const shortName = filePath.split("/").pop();
+        link.textContent = shortName;
+
+        // load the file into iframe when clicked
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          iframe.src = filePath;
+          iframe.classList.add("displayedInlineFrame");
+        });
+
         pagesList.appendChild(link);
       }
     }
 
-    // Handle double-clicks on words inside iframe
+    // ✅ Handle double-clicks on words inside iframe
     iframe.addEventListener("load", () => {
       const lang = input.value.trim();
       if (!lang) return;
@@ -237,6 +264,7 @@
             if (lastClicked === word && now - lastTime < 500) {
               const subFile = `files/irregular/irregular(${normalizedLang})/${word.toLowerCase()}(${normalizedLang}).html`;
               iframe.src = subFile;
+              iframe.classList.add("displayedInlineFrame");
               addPageLink(subFile);
             }
             lastClicked = word;
@@ -246,7 +274,7 @@
       }
     });
 
-    // Main "Charger" button
+    // ✅ Main "Charger" button
     document.getElementById("charger").addEventListener("click", () => {
       const lang = input.value.trim();
       if (!lang) {
