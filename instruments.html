@@ -7,7 +7,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      overflow-x: hidden; /* ✅ no scroll by default */
+      overflow-x: hidden;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -61,12 +61,13 @@
     }
 
     .wrapper {
-      display: flex;
-      flex-direction: row;
-      gap: 15px;
-      align-items: center;
-      justify-content: center;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-right: 150px;
+  
+}
 
     .input-wrapper {
       position: relative;
@@ -76,7 +77,6 @@
       display: flex;
       gap: 10px;
       align-items: center;
-      margin-top: 2px;
     }
 
     .blue, .white, .red {
@@ -167,7 +167,6 @@
       <button id="whiteButton" class="white">Clavier</button>
       <button id="redButton" class="red">Mots Corrélatifs</button>
 
-      <!-- ✅ Pages vues stays to the right of red button -->
       <div class="pagesListContainer">
         <div class="pagesListLabel">Pages vues:</div>
         <div id="pagesList" class="pagesList"></div>
@@ -175,15 +174,10 @@
     </div>
 
     <div class="wrapper">
-      <div class="input-wrapper">
-        <input type="text" id="autocomplete" size="50" placeholder="Écris une langue ici" />
-        <ul id="suggestions"></ul>
-      </div>
-      <div class="buttons">
-        <button id="charger">Charger</button>
-        <button id="effacer">Effacer</button>
-      </div>
-    </div>
+  <input type="text" id="autocomplete" size="50" placeholder="Écris une langue ici" />
+  <button id="charger">Charger</button>
+  <button id="effacer">Effacer</button>
+</div>
 
     <iframe id="inlineFrame" class="inlineFrame" frameBorder="0"></iframe>
   </div>
@@ -247,11 +241,11 @@
           e.preventDefault();
           iframe.src = filePath;
           iframe.classList.add("displayedInlineFrame");
-          document.documentElement.style.overflowX = "auto"; // ✅ enable horizontal scroll for entire page
+          document.documentElement.style.overflowX = "auto";
         });
 
         pagesList.appendChild(link);
-        document.documentElement.style.overflowX = "auto"; // ✅ enable scroll when link appears
+        document.documentElement.style.overflowX = "auto";
       }
     }
 
