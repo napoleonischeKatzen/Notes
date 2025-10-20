@@ -36,12 +36,6 @@
       margin-left: 15px;
     }
 
-    .pagesListLabel {
-      font-family: monospace;
-      font-weight: bold;
-      color: #000091;
-    }
-
     .pagesList {
       display: flex;
       flex-wrap: wrap;
@@ -140,23 +134,14 @@
       top: 100%;
       left: 0;
       width: 100%;
-      border: 1px solid #ccc;
       max-height: 150px;
       overflow-y: auto;
       margin-top: 4px;
-      padding: 0;
-      list-style: none;
+      padding-left: 40px;
+	  list-style: disc;
       background: white;
       z-index: 10;
-    }
-
-    .suggestions li {
-      padding: 8px;
-      cursor: pointer;
-    }
-
-    .suggestions li:hover {
-      background: #eee;
+      border: none;
     }
   </style>
 </head>
@@ -174,11 +159,14 @@
     </div>
 
     <div class="wrapper">
+    <div class="input-wrapper">
+    
   <input type="text" id="autocomplete" size="50" placeholder="Écris une langue ici" />
+  <ul id="suggestions" class="suggestions"></ul>
+	</div>
   <button id="charger">Charger</button>
   <button id="effacer">Effacer</button>
 </div>
-
     <iframe id="inlineFrame" class="inlineFrame" frameBorder="0"></iframe>
   </div>
 
