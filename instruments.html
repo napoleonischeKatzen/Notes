@@ -30,26 +30,30 @@
     }
 
     .pagesListContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-left: 15px;
-    }
+  position: relative;           /* establishes local positioning context */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 15px;
+}
 
-    .pagesList {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
-    }
+.pagesList {
+  position: absolute;           /* positioned relative to the container */
+  top: 20px;                    /* distance below “Pages vues:” label */
+  left: 0;
+  margin-left: 750px;           /* keep your same horizontal offset */
+  display: flex;
+  flex-direction: column;       /* vertical stacking */
+  gap: 6px;
+}
 
-    .pagesList a {
-      text-decoration: none;
-      color: #000091;
-      font-family: monospace;
-      cursor: pointer;
-    }
-
+.pagesList a {
+  display: block;           /* each link on its own line */
+  text-decoration: none;
+  color: #000091;
+  font-family: monospace;
+  cursor: pointer;
+}
     .pagesList a:hover {
       text-decoration: underline;
     }
@@ -59,7 +63,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-right: 150px;
+  margin-right: 157px;
   
 }
 
@@ -154,9 +158,10 @@
 
       <div class="pagesListContainer">
         <div class="pagesListLabel">Pages vues:</div>
-        <div id="pagesList" class="pagesList"></div>
+        
       </div>
     </div>
+    <div id="pagesList" class="pagesList"></div>
 
     <div class="wrapper">
     <div class="input-wrapper">
