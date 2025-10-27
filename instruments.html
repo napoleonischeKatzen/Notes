@@ -30,40 +30,37 @@
     }
 
 .pagesListContainer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 15px;
+  width: 180px;
+  flex-shrink: 0;
 }
-.pagesList {
-  position: absolute;
-  top: 40px;  
-  right: 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+
+
+    .pagesList {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      margin-top: 5px;
+    }
+
 .pagesList a {
-  display: block;
-  text-decoration: none;
-  color: #000091;
-  font-family: monospace;
-  cursor: pointer;
-  margin: 0 auto;  /* Center the links */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
+
     .pagesList a:hover {
       text-decoration: underline;
     }
 
     .wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-right: 157px;
-  
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-right: 227px;
+    }
 
     .input-wrapper {
       position: relative;
@@ -140,7 +137,7 @@
       overflow-y: auto;
       margin-top: 4px;
       padding-left: 40px;
-	  list-style: disc;
+      list-style: disc;
       background: white;
       z-index: 10;
       border: none;
@@ -156,20 +153,19 @@
 
       <div class="pagesListContainer">
         <div class="pagesListLabel">Pages vues:</div>
-        
+        <div id="pagesList" class="pagesList"></div>
       </div>
     </div>
-    <div id="pagesList" class="pagesList"></div>
 
     <div class="wrapper">
-    <div class="input-wrapper">
-    
-  <input type="text" id="autocomplete" size="50" placeholder="Écris une langue ici" />
-  <ul id="suggestions" class="suggestions"></ul>
-	</div>
-  <button id="charger">Charger</button>
-  <button id="effacer">Effacer</button>
-</div>
+      <div class="input-wrapper">
+        <input type="text" id="autocomplete" size="50" placeholder="Écris une langue ici" />
+        <ul id="suggestions" class="suggestions"></ul>
+      </div>
+      <button id="charger">Charger</button>
+      <button id="effacer">Effacer</button>
+    </div>
+
     <iframe id="inlineFrame" class="inlineFrame" frameBorder="0"></iframe>
   </div>
 
