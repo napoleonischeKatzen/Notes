@@ -13,13 +13,15 @@
       align-items: flex-start;
     }
 
-    .center-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-    }
+.center-wrapper {
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+    /* ===== BUTTON BAR ===== */
     .top-bar {
       display: flex;
       align-items: flex-start;
@@ -29,11 +31,24 @@
       gap: 10px;
     }
 
-.pagesListContainer {
+    /* ===== PAGES SECTION ===== */
+.pages-section {
+  position: fixed;
+  top: 17px;       /* Adjust vertical position as needed */
+  right: 90px;     /* Adjust horizontal position as needed */
   width: 180px;
-  flex-shrink: 0;
+  max-height: 200px;  /* Optional: limit height */
+  overflow-y: auto;   /* Scroll if too many links */
+  padding: 5px;
+  border-radius: 6px;
 }
 
+
+    .pagesListLabel {
+      font-weight: bold;
+      margin-bottom: 3px;
+      margin-left: 17px;
+    }
 
     .pagesList {
       display: flex;
@@ -43,23 +58,24 @@
       margin-top: 5px;
     }
 
-.pagesList a {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
+    .pagesList a {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
 
     .pagesList a:hover {
       text-decoration: underline;
     }
 
+    /* ===== INPUT AND ACTIONS ===== */
     .wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin-right: 227px;
+      margin-right: 63px;
     }
 
     .input-wrapper {
@@ -72,6 +88,7 @@
       align-items: center;
     }
 
+    /* ===== BUTTON STYLES ===== */
     .blue, .white, .red {
       padding: 15px 25px;
       font-size: 24px;
@@ -116,6 +133,7 @@
       transform: translateY(4px);
     }
 
+    /* ===== IFRAME ===== */
     .inlineFrame {
       display: none;
       overflow: hidden;
@@ -123,11 +141,12 @@
 
     .displayedInlineFrame {
       display: block;
-      width: 500px;
-      height: 725px;
+      width: 1000px;
+      height: 1000px;
       margin-top: 10px;
     }
 
+    /* ===== AUTOCOMPLETE ===== */
     .suggestions {
       position: absolute;
       top: 100%;
@@ -146,17 +165,21 @@
 </head>
 <body>
   <div class="center-wrapper">
+
+    <!-- ===== BUTTON BAR ===== -->
     <div class="top-bar">
       <button id="blueButton" class="blue">Mots Irréguliers</button>
       <button id="whiteButton" class="white">Clavier</button>
       <button id="redButton" class="red">Mots Corrélatifs</button>
-
-      <div class="pagesListContainer">
-        <div class="pagesListLabel">Pages vues:</div>
-        <div id="pagesList" class="pagesList"></div>
-      </div>
     </div>
 
+    <!-- ===== PAGES SECTION (separate logic) ===== -->
+    <div class="pages-section">
+      <div class="pagesListLabel">Pages vues:</div>
+      <div id="pagesList" class="pagesList"></div>
+    </div>
+
+    <!-- ===== INPUT AND CONTROLS ===== -->
     <div class="wrapper">
       <div class="input-wrapper">
         <input type="text" id="autocomplete" size="50" placeholder="Écris une langue ici" />
@@ -203,10 +226,19 @@
       });
     });
 
-    document.getElementById("effacer").addEventListener("click", () => {
-      input.value = "";
-      suggestions.innerHTML = "";
-    });
+   document.getElementById("effacer").addEventListener("click", () => {
+  // Clear input and suggestions
+  input.value = "";
+  suggestions.innerHTML = "";
+
+  // Remove iframe content and hide it
+  iframe.src = "";
+  iframe.classList.remove("displayedInlineFrame");
+  iframe.classList.add("inlineFrame");
+
+  // Reset all color buttons to their normal (unpressed) state
+  colorButtons.forEach(b => b.classList.remove("active"));
+});
 
     colorButtons.forEach(btn => {
       btn.addEventListener("click", () => {
@@ -218,6 +250,7 @@
     function addPageLink(filePath) {
       const existingLinks = Array.from(pagesList.querySelectorAll("a")).map(a => a.href);
       const fullURL = new URL(filePath, window.location.href).href;
+
       if (!existingLinks.includes(fullURL)) {
         const link = document.createElement("a");
         link.href = "#";
@@ -231,7 +264,13 @@
           document.documentElement.style.overflowX = "auto";
         });
 
-        pagesList.appendChild(link);
+        pagesList.prepend(link);
+
+        const links = pagesList.querySelectorAll("a");
+        if (links.length > 7) {
+          pagesList.removeChild(links[links.length - 1]);
+        }
+
         document.documentElement.style.overflowX = "auto";
       }
     }
@@ -265,30 +304,34 @@
       }
     });
 
-    document.getElementById("charger").addEventListener("click", () => {
-      const lang = input.value.trim();
-      if (!lang) {
-        alert("Veuillez entrer une langue avant de charger.");
-        return;
-      }
+   document.getElementById("charger").addEventListener("click", () => {
+  const lang = input.value.trim();
 
-      const normalizedLang = lang.toLowerCase();
-      let fileName = "";
+  // If the input box is empty:
+  if (!lang) {
+    // Simply revert the buttons to normal (non-active) state
+    colorButtons.forEach(b => b.classList.remove("active"));
+    return; // stop execution
+  }
 
-      if (blueBtn.classList.contains("active")) {
-        fileName = `files/irregular/irregular(${normalizedLang}).html`;
-      } else if (whiteBtn.classList.contains("active")) {
-        fileName = `files/keyboards/keyboard(${normalizedLang}).html`;
-      } else if (redBtn.classList.contains("active")) {
-        fileName = `files/correlative/correlative(${normalizedLang}).html`;
-      } else {
-        fileName = `files/inflections/inflections(${normalizedLang}).html`;
-      }
+  // Otherwise proceed normally
+  const normalizedLang = lang.toLowerCase();
+  let fileName = "";
 
-      iframe.src = fileName;
-      iframe.classList.add("displayedInlineFrame");
-      addPageLink(fileName);
-    });
+  if (blueBtn.classList.contains("active")) {
+    fileName = `files/irregular/irregular(${normalizedLang}).html`;
+  } else if (whiteBtn.classList.contains("active")) {
+    fileName = `files/keyboards/keyboard(${normalizedLang}).html`;
+  } else if (redBtn.classList.contains("active")) {
+    fileName = `files/correlative/correlative(${normalizedLang}).html`;
+  } else {
+    fileName = `files/inflections/inflections(${normalizedLang}).html`;
+  }
+
+  iframe.src = fileName;
+  iframe.classList.add("displayedInlineFrame");
+  addPageLink(fileName);
+});
   </script>
 </body>
 </html>
